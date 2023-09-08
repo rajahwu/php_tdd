@@ -1,1 +1,1 @@
-{"version":1,"defects":[],"times":{"TDD\\Test\\ReceiptTest::testTotal":0.001,"TDD\\Test\\ReceiptTest::testTax":0.001}}
+{"version":1,"defects":{"TDD\\Test\\ReceiptTest::testTotalAndCoupon":7,"TDD\\Test\\ReceiptTest::testPostTaxTotal":8},"times":{"TDD\\Test\\ReceiptTest::testTotal":0,"TDD\\Test\\ReceiptTest::testTax":0,"TDD\\Test\\ReceiptTest::testTotalAndCoupon":0,"TDD\\Test\\ReceiptTest::testPostTaxTotal":0,"TDD\\Test\\ReceiptTest::testTotal#0":0,"TDD\\Test\\ReceiptTest::testTotal#1":0,"TDD\\Test\\ReceiptTest::testTotal#2":0}}
