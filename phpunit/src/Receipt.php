@@ -1,7 +1,15 @@
 <?php
 namespace TDD;
+use \BadMethodCallException;
 class Receipt {
-    public function total(array $items = [], $coupon) {
+    public $Formatter;
+    public function __construct($formatter) {
+        $this->Formatter = $formatter;
+    }
+    public function subtotal(array $items = [], $coupon) {
+        if ($coupon > 1.00) {
+            throw new BadMethodCallException('Coupon must be less than or equal to 1.00');
+        }
         $sum = array_sum($items);
         if (!is_null($coupon)) {
             return $sum - ($sum * $coupon);
@@ -9,12 +17,13 @@ class Receipt {
         return $sum;
     }
 
-    public function tax($ammount, $tax) {
-        return $ammount * $tax;
+    public function tax($amount) {
+        return $this->Formatter->currencyAmt($amount * $this->tax);
     }
 
-    public function postTaxTotal($items, $tax, $coupon) {
-        $subtotal = $this->total($items, $coupon);
-        return $subtotal + $this->tax($subtotal, $tax);
+    public function postTaxTotal($items, $coupon) {
+        $subtotal = $this->subtotal($items, $coupon);
+        return $subtotal + $this->tax($subtotal);
     }
+
 }
