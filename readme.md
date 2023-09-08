@@ -54,3 +54,80 @@ public function add($data = []) {
     $this->Log->warning($data);
 }
 ```
+
+* Make it fast
+* Make it isolated
+* Make it fully covered
+
+### Test Double objects
+
+* Dummy
+
+```php
+    // Replaces an object typically as an input,
+    // that isn't used or needed for the test.
+    public function __construct(Database $db, ArrayObject $config) {
+        if(!$db->isConnected()) {
+            throw new Exception('Database is not connected');
+        }
+        .....
+    }
+```
+
+* Fake
+
+```php
+    // Replaces an object in which we need a simplified
+    // version of the object, typically to achieve speed
+    // improvements or to eliminate side effects.
+    public function save($data) {
+        ...
+        return $this->DB->sql();
+    }
+```
+
+* Stub
+
+```php
+    // Provides a preset anser to method calls that
+    // we have decided ahead of time.
+    public function __construct(Database $db, ArrayObject $config) {
+        if(!$db->isConnected()) {
+            throw new Exception('Database is not connected');
+        }
+        .....
+    }
+```
+
+* Spy
+
+```php
+    // A spy acts as a higher level stub, it allow us to
+    // also record information about what happened with this
+    // test double.
+    public function sendMessage(Email $email, Messages $messages) {
+        foreach($messages as $message) {
+            $email->send($message)
+        }
+        .....
+    }
+```
+
+* Mock
+
+```php
+    // A mock acts as a higher level stub, they are pre-
+    // programmed with expectations, including the ability
+    // to both respond to calls they know about and don;t
+    // know about
+    public function sendMessage(Email $email, Messages $messages) {
+        foreach($message as $message) {
+            if ($message->readyToSend()) {
+                $email->send($message);
+            }
+        }
+        .....
+    }
+```
+
+## Test Doubles are core to unit testing
