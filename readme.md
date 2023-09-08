@@ -38,3 +38,19 @@ php extensions
 a generic term for any case where you replace a production object
     for testing purposes
 [link](http://www.martinfowler.com/bliki/TestDouble.html)
+
+### Uses
+
+* Replace a dependency
+* Ensure a conditon occurs
+* Improve the performance of our tests
+
+```php
+public function add($data = []) {
+    if ($this->Model->validate($data)) {
+        $result = $this->Model->save($data);
+        return $this->processSave($result)
+    }
+    $this->Log->warning($data);
+}
+```
